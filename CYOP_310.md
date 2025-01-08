@@ -1,0 +1,31 @@
+# CYOP 310 Notes
+
+## Reading
+Practical Malware Analysis by Michael Sikorski, Andrew Honig    
+Malware Analysis Techniques by Dylan Barker 
+Mastering Malware Analysis Second Edition by Alexey Kleymenov, Amr Thabet  
+Practical Binary Analysis by Dennis Andriesse 
+Learning Malware Analysis by Monnappa KA 
+The Ghidra Book by Chris Eagle, Kara Nance 
+
+## Terms
+- Binary Analysis - The science and art of analyzing the properties of binary computer programs, called binaries, and the machine code and data they contain.
+- Binary Static Analysis - analysis without the binary running
+- Binary Dynamic Analysis - runs the binary and analyzes it as it executes.
+- Binary instrumentation
+- ISA = Instruction Set Architecture
+    - Example: x86 ISA, x64ISA
+- Intel syntax
+- AT&T syntax
+- Malware Analysis Definitions:
+    - The study of malicious software. The objective of malware analysis is to understand the working of malware and how to detect and eliminate it. 
+    - Usually to provide the information you need to respond to a network intrusion.
+- Debugger - a tool that allows you to run a program step by step, examine the contents of memory, and register values, and change the contents of memory and registers.
+- Disassembler - a tool that converts machine code into assembly code.
+    - Difference between debuggers and dissassemblers: https://danielmiessler.com/blog/the-difference-between-decompilers-disassemblers-debuggers-and-hex-editors
+
+## Tools
+- ldd - list dynamic dependencies
+    - Example: `ldd <binary>`
+- xxd - hexdump utility
+    - Example: `xxd <binary>`
