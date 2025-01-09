@@ -23,9 +23,16 @@ The Ghidra Book by Chris Eagle, Kara Nance
 - Debugger - a tool that allows you to run a program step by step, examine the contents of memory, and register values, and change the contents of memory and registers.
 - Disassembler - a tool that converts machine code into assembly code.
     - Difference between debuggers and dissassemblers: https://danielmiessler.com/blog/the-difference-between-decompilers-disassemblers-debuggers-and-hex-editors
+- PE - Portable Executable
+- Import hashing - a technique used to identify the functions imported by a binary.
+    - https://blog.virustotal.com/2014/02/virustotal-imphash.html
 
 ## Tools
 - ldd - list dynamic dependencies
     - Example: `ldd <binary>`
 - xxd - hexdump utility
     - Example: `xxd <binary>`
+
+## PE Header Structure
+- PE Headers are used to identify the file as a PE file.
+    - Common sections: `.text`, `.data`, `.rdata`, `.rsrc`, `.reloc`
