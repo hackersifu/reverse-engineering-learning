@@ -26,13 +26,35 @@ The Ghidra Book by Chris Eagle, Kara Nance
 - PE - Portable Executable
 - Import hashing - a technique used to identify the functions imported by a binary.
     - https://blog.virustotal.com/2014/02/virustotal-imphash.html
+- Fuzzy hashing - a technique used to identify similar files.
+    - https://ssdeep-project.github.io/ssdeep/index.html
 
 ## Tools
 - ldd - list dynamic dependencies
     - Example: `ldd <binary>`
 - xxd - hexdump utility
     - Example: `xxd <binary>`
+Powershell Tips:
+- Utilizing `Get-ChildItem` and piping the output to `Get-FileHash` is a great way to get the hashes of files in bulk and saves a great deal of time in triage, as opposed to manually providing each filename to Get-FileHash manually.
+- ssdeep - tool for fuzzy hashing
+    - Example: `ssdeep <binary>`
+    - Importing ssdeep hashes into VirusTotal: https://blog.virustotal.com/2014/02/virustotal-imphash.html
+    - ssdeep Advanced Usage: https://ssdeep-project.github.io/ssdeep/index.html
+- strings - extract strings from binary
+    - Example: `strings <binary>`
+    - Example: `strings -n 8 <binary>` - extract strings with 8 or more characters
 
 ## PE Header Structure
 - PE Headers are used to identify the file as a PE file.
     - Common sections: `.text`, `.data`, `.rdata`, `.rsrc`, `.reloc`
+
+## File Headers to file type
+- ELF - Executable and Linkable Format (Linux)
+- PE - Portable Executable (Windows)
+- Mach-O - Mach Object (macOS)
+- MZ - DOS Executable (Windows)
+- PK... - ZIP Archive
+- Rar! - RAR Archive
+- X.S.BB` - Mac Disk image file
+- %PDF - PDF file
+- MSCF - CAB file
