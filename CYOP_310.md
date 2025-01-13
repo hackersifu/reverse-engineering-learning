@@ -40,6 +40,7 @@ Powershell Tips:
     - Example: `ssdeep <binary>`
     - Importing ssdeep hashes into VirusTotal: https://blog.virustotal.com/2014/02/virustotal-imphash.html
     - ssdeep Advanced Usage: https://ssdeep-project.github.io/ssdeep/index.html
+    - ssdeep -l -r -p <directory> - generate ssdeep hashes for all files in a directory, and provides a percentage match between files.
 - strings - extract strings from binary
     - Example: `strings <binary>`
     - Example: `strings -n 8 <binary>` - extract strings with 8 or more characters
