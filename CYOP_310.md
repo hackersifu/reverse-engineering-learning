@@ -44,6 +44,8 @@ Powershell Tips:
 - strings - extract strings from binary
     - Example: `strings <binary>`
     - Example: `strings -n 8 <binary>` - extract strings with 8 or more characters
+- CFF Explorer - PE analysis tool
+    - Link: https://ntcore.com/explorer-suite/
 
 ## PE Header Structure
 - PE Headers are used to identify the file as a PE file.
