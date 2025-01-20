@@ -62,7 +62,9 @@ Powershell Tips:
 - %PDF - PDF file
 - MSCF - CAB file
 
-## ELF Section Details
+## ELF Overall Details
+
+### ELF Section Details
 Sections of the file format:
 -	.init – contains executable code that performs initialization tasks, and runs before any other code in the binary
 -	.fini – runs after the main program completes, acting as the destructor of the program
@@ -84,3 +86,6 @@ Sections of the file format:
 -	.debug – contains debugging information, such as line numbers and variable names (optional in production binaries)
 -	.note – stores metadata, such as build information or identification notes
 -	.tls – Thread Local Storage (TLS), used for variables that are unique to each thread
+
+### ELF calculation of size of the complete ELF library
+- size = e_shoff + (e_shentsize * e_shnum)
