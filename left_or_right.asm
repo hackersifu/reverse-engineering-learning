@@ -1,62 +1,49 @@
 section .data
-    msg db "Left or Right?", 0       ; null-terminated string
-    msg2 db "You chose left!", 0     ; null-terminated string
-    msg3 db "You chose right!", 0    ; null-terminated string
-    error db "Invalid choice!", 0    ; null-terminated string
-    answer db 0                      ; reserve 1 byte for the input answer
+    msg db "Left or Right?", 0xA, 0         ; Prompt message with newline
+    msg2 db "You chose left!", 0xA, 0       ; "Left" message
+    msg3 db "You chose right!", 0xA, 0      ; "Right" message
 
 section .text
-    global _start                    ; Entry point for the process
+    global _start
 
 _start:
     ; Print the message
-    mov eax, 4                       ; syscall number for sys_write
-    mov ebx, 1                       ; file descriptor 1 is stdout
-    mov ecx, msg                     ; address of the message
-    mov edx, 14                      ; length of the message
-    int 0x80                         ; call the kernel
+    mov rax, 1                   ; syscall number for sys_write
+    mov rdi, 1                   ; file descriptor (stdout)
+    mov rsi, msg                 ; address of the message
+    mov rdx, 15                  ; length of the message
+    syscall                      ; invoke the syscall
 
-    ; Read the answer
-    mov eax, 3                       ; syscall number for sys_read
-    mov ebx, 0                       ; file descriptor 0 is stdin
-    mov ecx, answer                  ; address of the answer
-    mov edx, 1                       ; read 1 byte
-    int 0x80                         ; call the kernel
+    ; Generate a random value using RDTSC
+    rdtsc                        ; read the timestamp counter into edx:eax
+    xor edx, eax                 ; combine high and low bits
+    and edx, 1                   ; mask to get either 0 or 1
 
-    ; Check the answer
-    cmp byte [answer], 'l'           ; compare the answer to 'l'
-    je left                          ; if equal, jump to left
-    cmp byte [answer], 'r'           ; compare the answer to 'r'
-    je right                         ; if equal, jump to right
-
-    ; Print an error message
-    mov eax, 4                       ; syscall number for sys_write
-    mov ebx, 1                       ; file descriptor 1 is stdout
-    mov ecx, error                   ; address of the error message
-    mov edx, 15                      ; length of the error message
-    int 0x80                         ; call the kernel
-    jmp exit                         ; exit the process
+    ; Compare the random value
+    cmp edx, 0
+    je left                      ; if 0, jump to left
+    jmp right                    ; otherwise, jump to right
 
 left:
     ; Print the left message
-    mov eax, 4                       ; syscall number for sys_write
-    mov ebx, 1                       ; file descriptor 1 is stdout
-    mov ecx, msg2                    ; address of the left message
-    mov edx, 15                      ; length of the left message
-    int 0x80                         ; call the kernel
-    jmp exit                         ; exit the process
+    mov rax, 1                   ; syscall number for sys_write
+    mov rdi, 1                   ; file descriptor (stdout)
+    mov rsi, msg2                ; address of the left message
+    mov rdx, 15                  ; length of the left message
+    syscall                      ; invoke the syscall
+    jmp exit                     ; exit the process
 
 right:
     ; Print the right message
-    mov eax, 4                       ; syscall number for sys_write
-    mov ebx, 1                       ; file descriptor 1 is stdout
-    mov ecx, msg3                    ; address of the right message
-    mov edx, 16                      ; length of the right message
-    int 0x80                         ; call the kernel
-    jmp exit                         ; exit the process
+    mov rax, 1                   ; syscall number for sys_write
+    mov rdi, 1                   ; file descriptor (stdout)
+    mov rsi, msg3                ; address of the right message
+    mov rdx, 16                  ; length of the right message
+    syscall                      ; invoke the syscall
+    jmp exit                     ; exit the process
 
 exit:
     ; Exit the process
-    mov eax, 1                       ; syscall number for sys_exit
-    xor ebx, ebx                     ; return code 0
-    int 0x80                         ; call the kernel
+    mov rax, 60                  ; syscall number for sys_exit
+    xor rdi, rdi                 ; return code 0
+    syscall                      ; invoke the syscall
