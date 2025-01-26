@@ -91,3 +91,7 @@ Sections of the file format:
 
 ### ELF calculation of size of the complete ELF library
 - size = e_shoff + (e_shentsize * e_shnum)
+
+## Ghidra Notes
+- You can rename variables in Ghidra by right-clicking on the variable and selecting "Rename Variable"
+    - This is helpful to follow along in the analysis.
