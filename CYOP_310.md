@@ -95,3 +95,8 @@ Sections of the file format:
 ## Ghidra Notes
 - You can rename variables in Ghidra by right-clicking on the variable and selecting "Rename Variable"
     - This is helpful to follow along in the analysis.
+- Look up the total number of functions via the Help -> About File.
+- Go to a specific function by using the Navigation -> Go To option in the top menu.
+
+## Flirt Technology
+- FLIRT (Fast Library Identification and Recognition Technology) is a tool that allows you to identify functions in a binary by comparing them to a database of known functions.
