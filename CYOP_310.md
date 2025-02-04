@@ -6,7 +6,8 @@ Malware Analysis Techniques by Dylan Barker
 Mastering Malware Analysis Second Edition by Alexey Kleymenov, Amr Thabet  
 Practical Binary Analysis by Dennis Andriesse 
 Learning Malware Analysis by Monnappa KA 
-The Ghidra Book by Chris Eagle, Kara Nance 
+The Ghidra Book by Chris Eagle, Kara Nance
+Quick Guide to Assembly - https://leocontent.umgc.edu/content/dam/course-content/tus/cyop/cyop-310/documents/dis06-assembly.pdf?ou=1346078
 
 ## Terms
 - Binary Analysis - The science and art of analyzing the properties of binary computer programs, called binaries, and the machine code and data they contain.
@@ -28,6 +29,7 @@ The Ghidra Book by Chris Eagle, Kara Nance
     - https://blog.virustotal.com/2014/02/virustotal-imphash.html
 - Fuzzy hashing - a technique used to identify similar files.
     - https://ssdeep-project.github.io/ssdeep/index.html
+- Code constructs - A code construct is a code abstraction level that defines a functional property but not the details of its implementation. Examples of code constructs include loops, if statements, linked lists, switch statements, and so on. Programs can be broken down into individual constructs that, when combined, implement the overall functionality of the program.
 
 ## Tools
 - ldd - list dynamic dependencies
@@ -48,6 +50,8 @@ Powershell Tips:
     - Link: https://ntcore.com/explorer-suite/
 - myCompiler - online compiler and debugger
     - Link: https://www.mycompiler.io/new/asm-x86_64
+- certutil - Check the hash of the file
+    - Example: `certutil -hashfile <filename> SHA1`
 
 ## PE Header Structure
 - PE Headers are used to identify the file as a PE file.
@@ -100,3 +104,9 @@ Sections of the file format:
 
 ## Flirt Technology
 - FLIRT (Fast Library Identification and Recognition Technology) is a tool that allows you to identify functions in a binary by comparing them to a database of known functions.
+
+## Dynamic Analysis Process
+### Prerequisites
+- Open up Procmon
+- Open Up Process Explorer (procexp)
+- FakeNet-NG
