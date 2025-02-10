@@ -52,6 +52,7 @@ Powershell Tips:
     - Link: https://www.mycompiler.io/new/asm-x86_64
 - certutil - Check the hash of the file
     - Example: `certutil -hashfile <filename> SHA1`
+- RegShot - Registry comparison tool
 
 ## PE Header Structure
 - PE Headers are used to identify the file as a PE file.
@@ -110,3 +111,8 @@ Sections of the file format:
 - Open up Procmon
 - Open Up Process Explorer (procexp)
 - FakeNet-NG
+- ProcWatch
+
+## Using Debuggers
+- Debuggers are used to run a program step by step, examine the contents of memory, and register values, and change the contents of memory and registers.
+- Set breakpoints right before or after crucial function calls to understand the behavior of the program.
