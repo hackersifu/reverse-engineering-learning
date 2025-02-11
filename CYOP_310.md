@@ -116,3 +116,20 @@ Sections of the file format:
 ## Using Debuggers
 - Debuggers are used to run a program step by step, examine the contents of memory, and register values, and change the contents of memory and registers.
 - Set breakpoints right before or after crucial function calls to understand the behavior of the program.
+- Things to look for in debugger view:
+    - MOV - This is moving data from one location to another.
+        - Example: `MOV EAX, 0x1` - This moves the value `0x1` into the `EAX` register.
+        - Malware may use this to move data into registers to perform operations.
+    - XOR - This is an exclusive OR operation.
+        - Example: `XOR EAX, EAX` - This sets the `EAX` register to `0`.
+        - Malware may use this to clear registers or perform other operations.
+    - JMP - This is a jump operation.
+        - Example: `JMP 0x401000` - This jumps to the address `0x401000`.
+        - Malware may use this to jump to a different part of the program.
+    - JE - This is a jump if equal operation.
+        - Example: `JE 0x401000` - This jumps to the address `0x401000` if the zero flag is set.
+        - Malware may use this to perform conditional jumps.
+    - CMP - This is a comparison operation.
+        - Example: `CMP EAX, 0x1` - This compares the value in `EAX` to `0x1`.
+        - Malware may use this to compare values and make decisions based on the result.
+    
