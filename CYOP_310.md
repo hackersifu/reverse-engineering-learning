@@ -139,4 +139,8 @@ Sections of the file format:
         - Example: `SIDT` - This stores the interrupt descriptor table in a register.
         - Malware may use this to gather information about the system.
         - This is sometimes called a "red pill" operation.
+
+## Anti-Analysis Techniques
+- IsDebuggerPresent - This function checks if a debugger is attached to the process.
+- CheckRemoteDebuggerPresent - This function checks if a debugger is attached to the process from a remote location.
     
