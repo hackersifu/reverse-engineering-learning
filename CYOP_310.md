@@ -132,4 +132,11 @@ Sections of the file format:
     - CMP - This is a comparison operation.
         - Example: `CMP EAX, 0x1` - This compares the value in `EAX` to `0x1`.
         - Malware may use this to compare values and make decisions based on the result.
+    - NOP - This is a no-operation instruction.
+        - Example: `NOP` - This does nothing.
+        - Malware may use this to pad out code or avoid detection.
+    - SIDT - This is a store interrupt descriptor table operation.
+        - Example: `SIDT` - This stores the interrupt descriptor table in a register.
+        - Malware may use this to gather information about the system.
+        - This is sometimes called a "red pill" operation.
     
