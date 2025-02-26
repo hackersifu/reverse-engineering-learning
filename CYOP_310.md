@@ -53,6 +53,7 @@ Powershell Tips:
 - certutil - Check the hash of the file
     - Example: `certutil -hashfile <filename> SHA1`
 - RegShot - Registry comparison tool
+- Malware Samples - https://github.com/Da2dalus/The-MALWARE-Repo
 
 ## PE Header Structure
 - PE Headers are used to identify the file as a PE file.
