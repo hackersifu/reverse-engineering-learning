@@ -1,4 +1,4 @@
-# LLM4Decompile Deployment on AWS EC2 - Guide (Updated v2)
+# LLM4Decompile Deployment on AWS EC2 - Guide (Final Updated)
 
 ## 1. Choose EC2 Instance Type
 - **GPU (recommended)**: `g5.xlarge` or `g4dn.xlarge`
@@ -9,7 +9,7 @@
 - **Ubuntu Server 22.04 LTS** – Lightweight and stable
 - **Amazon Linux 2023** – Only if you prefer minimal base
 
-## 3. Dockerfile Example
+## 3. Dockerfile Example (Corrected for `test.py`)
 
 ```Dockerfile
 FROM python:3.10-slim
@@ -19,7 +19,10 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN git clone https://github.com/albertan017/LLM4Decompile.git /app/LLM4Decompile
 ENV TRANSFORMERS_CACHE=/app/hf_cache
-CMD ["python", "LLM4Decompile/predict.py", "--input", "/app/data/input.json", "--output", "/app/data/output.json"]
+CMD ["python", "LLM4Decompile/test.py", 
+     "--model_path", "Salesforce/codet5-base", 
+     "--test_file", "/app/data/input.json", 
+     "--output_file", "/app/data/output.json"]
 ```
 
 ## 4. `requirements.txt` Content
@@ -42,8 +45,8 @@ scikit-learn==1.3.2
 
 ```bash
 aws s3 cp s3://your-bucket/input.json ./data/input.json
-python predict.py --input ./data/input.json --output result.json
-aws s3 cp result.json s3://your-bucket/results/
+python test.py --model_path Salesforce/codet5-base --test_file ./data/input.json --output_file ./data/output.json
+aws s3 cp ./data/output.json s3://your-bucket/results/
 ```
 
 ## 7. Detailed Example Usage Workflow for Running LLM4Decompile in Docker
@@ -88,3 +91,9 @@ The output will be saved to `./data/output.json`. Example:
   }
 ]
 ```
+
+---
+
+## 8. Notes
+- The correct script to run inference is `test.py` located at the root of the repo.
+- The `predict.py` reference was incorrect and should be ignored.
