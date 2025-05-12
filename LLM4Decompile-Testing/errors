@@ -1,0 +1,10 @@
+(base) ubuntu@ip-172-31-17-239:~/LLM4Decompile-test/repo_test/reverse-engineering-learning/LLM4Decompile-Testing$ python compile.py 
+cc1: fatal error: samples/sample.c: No such file or directory
+compilation terminated.
+Traceback (most recent call last):
+  File "/home/ubuntu/LLM4Decompile-test/repo_test/reverse-engineering-learning/LLM4Decompile-Testing/compile.py", line 13, in <module>
+    subprocess.run(compile_command, shell=True, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/miniconda3/lib/python3.13/subprocess.py", line 579, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
