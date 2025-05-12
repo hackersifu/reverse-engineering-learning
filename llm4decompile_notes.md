@@ -19,7 +19,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN git clone https://github.com/albertan017/LLM4Decompile.git /app/LLM4Decompile
 ENV TRANSFORMERS_CACHE=/app/hf_cache
-CMD python LLM4Decompile/test.py --model_path Salesforce/codet5-base --test_file /app/data/input.json --output_file /app/data/output.json
+CMD ["python", "LLM4Decompile/test.py", "--model_path", "Salesforce/codet5-base", "--test_file", "/app/data/input.json", "--output_file", "/app/data/output.json"]
 ```
 
 ## 4. `requirements.txt` Content
