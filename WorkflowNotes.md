@@ -17,3 +17,14 @@
   - This is when debuggers are used (e.g. x64dbg, WinDbg)
   - Confirm functionality
   - Handling of strings, APIs, embedded payloads, and communication encryption
+
+### Choosing an Analysis Strategy
+Reverse engineering is a time-consuming process, and in many cases, there aren't the resources available to allow engineers to dive as deep as they would like to.
+
+- Understand the audience (potential use cases)
+   - For Threat Intelligence
+      - Focuses on obtaining IoCs (files, hashes, network artifacts). Extraction of embedded payloads and downloading remote samples are priorities, as well as identifying the C2 infrastructure and finding related modules.
+   - For AV detection
+   - For a technical article or conference presentation
+   - For the general public
+      - 
