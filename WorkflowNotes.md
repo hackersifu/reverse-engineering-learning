@@ -28,3 +28,8 @@ Reverse engineering is a time-consuming process, and in many cases, there aren't
    - For a technical article or conference presentation
    - For the general public
       - 
+
+
+### Straightforward Techniques
+- Check the hash with certutil
+- Use CFF Explorer to analyze PE headers
