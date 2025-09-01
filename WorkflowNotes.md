@@ -33,3 +33,4 @@ Reverse engineering is a time-consuming process, and in many cases, there aren't
 ### Straightforward Techniques
 - Check the hash with certutil
 - Use CFF Explorer to analyze PE headers
+- Use strings to look for interesting indicators, such as error codes, URLs, IP addresses, mutex names, and file paths
