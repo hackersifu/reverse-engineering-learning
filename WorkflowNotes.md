@@ -33,4 +33,7 @@ Reverse engineering is a time-consuming process, and in many cases, there aren't
 ### Straightforward Techniques
 - Check the hash with certutil
 - Use CFF Explorer to analyze PE headers
+  - On Flare VM, right-click the file and select "Open with CFF Explorer"
 - Use strings to look for interesting indicators, such as error codes, URLs, IP addresses, mutex names, and file paths
+- Use PeStudio to get a quick overview of the PE file
+  - On Flare VM, PeStudio is located in the Tools folder under the C:\ drive
