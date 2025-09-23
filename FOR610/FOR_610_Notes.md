@@ -63,3 +63,28 @@ http://maliciousdomain.com/index.php?i=1&c=2&s=3
 Decompliation vs Disassembly
 - Decompilation - The process of converting low-level machine code back into high-level source code
 - Disassembly - The process of converting machine code into assembly language, which is a low-level representation of the code that is closer to the original source code but still requires knowledge of assembly language to understand.
+
+# Assembly
+- As a reverse engineer, you don't need to be a assembly programmer.
+- Some common instructions a RE should know:
+    - mov - Move data from one location to another
+    - push - Push data onto the stack
+    - pop - Pop data off the stack
+    - call - Call a function
+    - ret - Return from a function
+    - jmp - Jump to a different location in the code
+    - jz - Jump if zero
+    - jnz - Jump if not zero
+
+# Pointers
+- A pointer is a variable that stores the memory address of another variable.
+- Pay attention to the brackets [] - they indicate that the value is a pointer.
+- Example:
+    - mov eax, [ebx] - Move the value at the memory address stored in   ebx into eax
+    - mov eax, ebx - Move the value of ebx into eax
+
+# Function Calling Conventions
+- cdecl - The caller cleans the stack. Used in C programs.
+- stdcall - The callee cleans the stack. Used in Windows API functions.
+- fastcall - The first two arguments are passed in registers (ecx and edx), the rest are passed on the stack. Used in some C++ programs.
+- thiscall - The this pointer is passed in ecx, the rest of the arguments are passed on the stack. Used in C++ member functions.
