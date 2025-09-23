@@ -85,6 +85,35 @@ Decompliation vs Disassembly
 
 # Function Calling Conventions
 - cdecl - The caller cleans the stack. Used in C programs.
+    - Example in disassembly:
+        - push 
+        - push ecx
+        - call <function>
+        - add esp, 8  ; Clean up the stack (2 arguments * 4 bytes each)
 - stdcall - The callee cleans the stack. Used in Windows API functions.
+    - Example in disassembly:
+        - push 
+        - push ecx
+        - call <function>
+        - ret 8  ; Clean up the stack (2 arguments * 4 bytes each)
 - fastcall - The first two arguments are passed in registers (ecx and edx), the rest are passed on the stack. Used in some C++ programs.
+    - Example in disassembly:
+        - mov ecx, <arg1>
+        - mov edx, <arg2>
+        - push <arg3>
+        - call <function>
+        - add esp, 4  ; Clean up the stack (1 argument * 4 bytes)
 - thiscall - The this pointer is passed in ecx, the rest of the arguments are passed on the stack. Used in C++ member functions.
+    - Example in disassembly:
+        - mov ecx, <this>
+        - push <arg1>
+        - call <function>
+        - add esp, 4  ; Clean up the stack (1 argument * 4 bytes)
+
+# More Stack Notes
+- push is subtract 4 from esp and then write the value to the address in esp
+- LEA - Load Effective Address
+    - Used to get the address of a variable
+    - Example:
+        - lea eax, [ebx+4] - Load the address of ebx + 4 into eax
+    - Brackets don't mean anything with LEA, it's the only instruction where they don't indicate a pointer dereference
