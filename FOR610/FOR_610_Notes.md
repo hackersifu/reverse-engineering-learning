@@ -117,3 +117,8 @@ Decompliation vs Disassembly
     - Example:
         - lea eax, [ebx+4] - Load the address of ebx + 4 into eax
     - Brackets don't mean anything with LEA, it's the only instruction where they don't indicate a pointer dereference
+- JC - Jump if Carry, used for unsigned comparisons
+- JB - Jump if Below, used for unsigned comparisons
+    - JB and JC are the same instruction. They are just different mnemonics for the same opcode.
+- JNC - Jump if Not Carry, used for unsigned comparisons
+- If I see a JZ and JNC pointing to the same function, I'm probably looking at an AND statement.
