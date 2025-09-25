@@ -122,3 +122,9 @@ Decompliation vs Disassembly
     - JB and JC are the same instruction. They are just different mnemonics for the same opcode.
 - JNC - Jump if Not Carry, used for unsigned comparisons
 - If I see a JZ and JNC pointing to the same function, I'm probably looking at an AND statement.
+
+# Packers
+- Command for Packing a file with UPX
+    upx -9 original.exe -o packed.exe
+- Unpacking a file with UPX: upx -d
+    upx -d packed.exe unpacked.exe
