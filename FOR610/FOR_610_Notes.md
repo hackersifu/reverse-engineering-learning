@@ -157,6 +157,8 @@ Decompliation vs Disassembly
     - ProcessWow64Information - 26
     - ProcessImageFileName - 27
     - ProcessBreakOnTermination - 29
+- GetModuleHandle - Retrieves a module handle for the specified module (https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew)
+- VirtualProtect - Changes the protection on a region of committed pages in the virtual address space of the calling process (https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect)
 
 # peframes
 - A tool to analyze PE files and extract various attributes and indicators of compromise (IOCs).
@@ -183,6 +185,7 @@ Decompliation vs Disassembly
     - WriteProcessMemory - Writes data to the memory of a specified process.
     - CreateRemoteThread - Creates a thread in the address space of a specified process.
     - LoadLibrary - Loads a DLL into the address space of the calling process.
+        - LoadLibraryA - ANSI version
     - CreateToolhelp32Snapshot - Takes a snapshot of the specified processes, as well as the heaps, modules, and threads used by these processes.
     - EnumProcesses - Enumerates all processes currently running on the system.
     - Nt and Zw Functions - Native API functions used for low-level operations, including process and memory management.
@@ -213,3 +216,32 @@ thread, including its stack, exception handling, and thread-local storage.
 - Usually involves CreateProcess, NtUnmapViewOfSection, VirtualAllocEx, WriteProcessMemory, and ResumeThread.
     - Uses CreateProcess with the CREATE_SUSPENDED flag to create a new process in a suspended state.
         - Example: CreateProcess("C:\\Windows\\System32\\notepad.exe", NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi);
+
+
+# Virtualization Avoidance Techniques
+- Techniques used by malware to detect and avoid running in virtualized environments, such as virtual machines (VMs) or sandboxes. This helps the malware evade analysis and detection by security researchers and automated analysis tools.
+- SetWindowsHookEx - A Windows API function that allows an application to install a hook procedure into a hook chain. Malware can use this function to detect user interactions, such as mouse movements or keyboard input, which may indicate that the malware is running in a virtualized environment.
+    - Example: SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardProc, NULL, 0); - Installs a low-level keyboard hook to monitor keyboard input.
+
+# Disabling ASLR
+- To disable ASLR, you can use setdllcharactistics within x32dbg or x64dbg.
+    - setdllcharacteristics -d <address> <characteristics>
+    - Example: setdllcharacteristics -d 00400000 0x0040
+        - This command disables ASLR for the module loaded at address 00400000 by removing the IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE flag (0x0040) from the module's characteristics.
+
+
+# Ghidra
+- Using Set Equate - Right-click on a value -> Set Equate -> Enter the name of the equate (e.g., "ERROR_SUCCESS") -> Click OK
+    - This will replace all instances of the value with the equate name in the disassembly and decompilation views. It knows this due to the Windows API definitions that come with Ghidra.
+
+# Structured Exception Handling (SEH)
+- A mechanism in Windows that allows applications to handle exceptions and errors in a structured way. 
+    - Example in the debugger: mov eax, fs:[0] - Move the address of the SEH chain into eax
+
+# Segment Registers Information
+- fs - Used to access the TEB in x86 architecture.
+- gs - Used to access the TEB in x64 architecture.
+- You can change the segment registers using the MOV instruction.
+    - Example: mov fs, ax - Move the value in ax into the fs segment register
+
+# Bypassing Self-Defensive Measures (or Anti-Debugging Techniques)
