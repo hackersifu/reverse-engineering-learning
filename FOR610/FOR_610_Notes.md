@@ -165,6 +165,11 @@ Decompliation vs Disassembly
 - pdf-parser.py - A tool to parse and analyze PDF files, allowing you to extract objects, streams, and metadata.
 - XObject - An external object that is referenced in the PDF file, such as an image or font (mostly images though).
     - Example: /Type /XObject
+- PDF Object Types
+    - /AA - Additional Actions
+    - /OpenAction - Action to be performed when the document is opened
+    - /JS - JavaScript action
+    - /URI - Uniform Resource Identifier action
 
 
 # Microsoft Office and VBA Macros
@@ -176,6 +181,9 @@ Decompliation vs Disassembly
 
 # Locating kernel32.dll
 - Process Environment Block (PEB) - A data structure in Windows that contains information about the currently running process, including a list of loaded modules (DLLs).
+    - This points to the PEB:
+        - mov eax, fs:[0x30] - For x86
+        - mov rax, gs:[0x60] - For x64
 - Thread Environment Block (TEB) - A data structure in Windows that contains information about the currently running thread, including a pointer to the PEB.
 - Thread Information Block (TIB) - Another name for the TEB.
 
@@ -202,6 +210,8 @@ Decompliation vs Disassembly
 
 # Windows Functions of Interest to Reverse Engineers
 - VirtualAlloc - Allocates memory in the virtual address space of the calling process (https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc)
+- VirtualAllocEx - Allocates memory in the virtual address space of a specified process (https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualallocex)
+- To change the permissions of a 
 - CreateFile - Creates or opens a file or I/O device (https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew)
 - Process32First - Retrieves information about the first process encountered in a system snapshot (https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-process32first)
 - IsDebuggerPresent - Determines whether the calling process is being debugged (https://learn.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-isdebuggerpresent)
@@ -233,6 +243,7 @@ Decompliation vs Disassembly
 - A technique used by malware to inject malicious code into the address space of a legitimate process. This allows the malware to run with the privileges of the target process, making it harder to detect and remove.
 - Common methods of code injection include:
     - DLL Injection - Injecting a malicious DLL into a target process using functions like CreateRemoteThread and LoadLibrary.
+        - APIs used: OpenProcess, VirtualAllocEx, WriteProcessMemory, CreateRemoteThread, LoadLibrary
     - Process Hollowing - Creating a new process in a suspended state, replacing its memory with malicious code, and then resuming the process.
     - APC Injection - Using Asynchronous Procedure Calls (APCs) to execute malicious code in the context of a target thread.
 - APIs used for Code Injection for Windows:
@@ -293,6 +304,9 @@ thread, including its stack, exception handling, and thread-local storage.
 # Structured Exception Handling (SEH)
 - A mechanism in Windows that allows applications to handle exceptions and errors in a structured way. 
     - Example in the debugger: mov eax, fs:[0] - Move the address of the SEH chain into eax
+    - Frame-based Exception Handling - A method of exception handling that uses a linked list of exception registration records to manage exceptions. This is specific to 32-bit Windows applications.
+    - Table-based Exception Handling - A method of exception handling that uses a table of exception handlers to manage exceptions. This is specific to 64-bit Windows applications.
+    - Windows determines the address of the first SEH record by reading the value at fs:[0] (for x86) or gs:[0] (for x64).
 
 # Segment Registers Information
 - fs - Used to access the TEB in x86 architecture.
@@ -301,3 +315,24 @@ thread, including its stack, exception handling, and thread-local storage.
     - Example: mov fs, ax - Move the value in ax into the fs segment register
 
 # Bypassing Self-Defensive Measures (or Anti-Debugging Techniques)
+
+
+# RDTSC Instruction
+- RDTSC (Read Time-Stamp Counter) is an assembly instruction that reads the current value of the processor's time-stamp counter, which is a 64-bit register that counts the number of clock cycles since the last reset.
+- It is often used in anti-debugging techniques to measure the time taken to execute certain code sections, as debuggers can introduce delays that can be detected by the malware.
+- Example usage in assembly:
+    - rdtsc - Reads the time-stamp counter and stores the lower 32 bits in EAX and the upper 32 bits in EDX.
+    - You can then compare the values before and after a code section to determine if a debugger is present based on the time taken to execute that section.
+
+# Random Questions
+- In 32-bit Windows, the RET instruction affects the register of:
+    - ESP (Extended Stack Pointer) - The RET instruction pops the return address from the stack and transfers control to that address, effectively modifying the ESP register.
+    - EIP (Extended Instruction Pointer) - The RET instruction updates the EIP register to point to the return address, allowing the CPU to continue executing instructions from that address.
+- The registers value that is pushed into the stack to store "saved frame data" is EBP (Extended Base Pointer). The EBP register is used to create a stack frame for a function, and it is typically pushed onto the stack at the beginning of a function to save the previous frame's base pointer. This allows the function to access its local variables and parameters relative to the EBP register.
+- To pass the fourth argument to a subroutine, use this following instruction written in hex: [EBP + 0x10]. In the cdecl calling convention, the first three arguments are passed in registers (ECX, EDX, and R8), while any additional arguments are passed on the stack. The fourth argument is located at an offset of 0x10 from the base pointer (EBP) in the stack frame.
+- In JavaScript, the function to detect source code modifications is arguments.callee. 
+- To add code libraries to a compiled file, you would use a linker. A linker is a tool that combines object files and libraries into a single executable file, resolving references between them and ensuring that all necessary code is included in the final binary.
+- PDF obj format
+    - obj 2 0
+        - object number 2, generation number 0
+        - The object ID is "2 0"
