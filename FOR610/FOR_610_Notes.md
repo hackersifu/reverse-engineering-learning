@@ -122,3 +122,59 @@ Decompliation vs Disassembly
     - JB and JC are the same instruction. They are just different mnemonics for the same opcode.
 - JNC - Jump if Not Carry, used for unsigned comparisons
 - If I see a JZ and JNC pointing to the same function, I'm probably looking at an AND statement.
+
+# Ghidra Usage Tips
+- Search - Press G
+- Defined Strings - Right click on a string in the decompiler window and select "Defined Strings" to see all instances of that string in the code.
+- Function Graph - Right click on a function in the decompiler window and select "Function Graph" to see a graphical representation of the function's control flow.
+- Using Show References versus Function Call Tree
+    - Show References - Shows all references to a selected function or variable in the code.
+    - Function Call Tree - Shows the call hierarchy of functions in the code, allowing you to see which functions call which other functions.
+    - Differences: Show References is more focused on a specific function or variable, while Function Call Tree provides a broader view of the entire codebase's function calls.
+- Browser Field Formatter - Click on the "Edit the Listing Field" button within the Listing window.
+
+# Dropper Analysis (Analyzing DLLs)
+- A dropper is a tool that drops the next stage to disk and runs it.
+    - Look for WriteFile, CreateFile, and CloseHandle API calls to identify where the drop
+
+# 32 vs 64 Bit
+- WoW64 - Windows on Windows 64, a compatibility layer that allows 32-bit Windows applications to run on 64-bit Windows.
+- General purpose registers:
+    - 32-bit: EAX, EBX, ECX, EDX, ESI, EDI, EBP, ESP
+    - 64-bit: RAX, RBX, RCX, RDX, RSI, RDI, RBP, RSP, R8-R15
+    - Special-use registers are extended and renamed (e.g., EIP becomes RIP)
+- Calling conventions:
+    - 32-bit: cdecl, stdcall, fastcall, thiscall
+    - 64-bit: Microsoft x64 calling convention (first four arguments in RCX,
+    - Calling convention resembles fastcall, but with more registers available for argument passing)
+        - First four integer or pointer arguments are passed in RCX, RDX, R8, and R9
+        - Additional arguments are passed on the stack
+- There is a new addressing mode called RIP-relative addressing, which allows for position-independent code.
+    - RIP + Displacement = Effective Address
+    - Example: mov eax, [RIP + 0x200] ; Load the value at the address RIP + 0x200 into eax
+- Stack alignment: 64-bit requires the stack to be 16-byte aligned at the point of a function call.
+
+
+# Parsing PDFs
+- Look for the header %PDF-1.x (where x is the version number)
+- startxref - Indicates the byte offset of the start of the cross-reference table
+- Indirect objects - Objects that are defined in the PDF file and can be referenced by other objects using their object number and generation number.
+    - Example: 12 0 obj ... endobj
+        - endobj indicates the end of the object definition
+- pdfid.py - A tool to identify PDF files and check for common vulnerabilities.
+- pdf-parser.py - A tool to parse and analyze PDF files, allowing you to extract objects, streams, and metadata.
+- XObject - An external object that is referenced in the PDF file, such as an image or font (mostly images though).
+    - Example: /Type /XObject
+
+
+# Microsoft Office and VBA Macros
+- MOTW - Mark of the Web, a security feature that indicates the origin of a file downloaded from the internet.
+    - Example: <!-- saved from url=(0014)about:internet -->
+- scdbgct - A tool to decode and analyze VBA macros in Microsoft Office documents.
+    - Example usage: scdbgct -f <document.docm>
+
+
+# Locating kernel32.dll
+- Process Environment Block (PEB) - A data structure in Windows that contains information about the currently running process, including a list of loaded modules (DLLs).
+- Thread Environment Block (TEB) - A data structure in Windows that contains information about the currently running thread, including a pointer to the PEB.
+- Thread Information Block (TIB) - Another name for the TEB.
