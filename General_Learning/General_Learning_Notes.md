@@ -1,4 +1,4 @@
-# FOR 610 Overall Notes
+# General Learning Notes
 
 # Why Malware Analysis?
 - Exploit dev uses it
